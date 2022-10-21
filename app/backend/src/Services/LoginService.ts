@@ -13,6 +13,9 @@ class LoginService {
 
   public login = async (body: Login):Promise<Service> => {
     const { password, email } = body;
+    if (!email) {
+      return { type: 'All fields must be filled', message: 'All fields must be filled' };
+    }
     const getByEmail = await Users.findOne({ where: { email } });
     if (!getByEmail) {
       return { type: 'Email Not Found', message: 'Email Not Found' };

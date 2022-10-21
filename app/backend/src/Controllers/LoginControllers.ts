@@ -12,7 +12,7 @@ class LoginControllers {
     const { body } = req;
     const { type, message } = await this.service.login(body);
     if (type) {
-      return res.status(400).json({ message: 'Login Failed' });
+      return res.status(400).json({ message });
     }
     return res.status(200).json({ token: message });
   };
