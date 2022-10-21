@@ -10,9 +10,9 @@ class LoginControllers {
 
   public login = async (req: Request, res: Response) => {
     const { body } = req;
-    const { type, message } = await this.service.login(body);
-    if (type) {
-      return res.status(400).json({ message });
+    const { status, message } = await this.service.login(body);
+    if (status) {
+      return res.status(status).json({ message });
     }
     return res.status(200).json({ token: message });
   };

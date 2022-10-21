@@ -1,5 +1,5 @@
 interface Service {
-  type: null | string
+  status: null | number
   message: string
 }
 

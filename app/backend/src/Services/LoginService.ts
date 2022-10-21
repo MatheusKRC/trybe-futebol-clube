@@ -4,6 +4,11 @@ import Login from '../Interfaces/Login';
 import Users from '../database/models/Users';
 import JWT from '../Utils/JWT';
 
+const validateEmail = (email: string): boolean => {
+  const re = /\S+@\S+\.\S+/;
+  return re.test(email);
+};
+
 class LoginService {
   postModel: Users;
 
@@ -13,20 +18,23 @@ class LoginService {
 
   public login = async (body: Login):Promise<Service> => {
     const { password, email } = body;
-    if (!email) {
-      return { type: 'All fields must be filled', message: 'All fields must be filled' };
+    if (!email || !password) {
+      return { status: 400, message: 'All fields must be filled' };
+    }
+    if (!validateEmail(email)) {
+      return { status: 401, message: 'Incorrect email or password' };
     }
     const getByEmail = await Users.findOne({ where: { email } });
     if (!getByEmail) {
-      return { type: 'Email Not Found', message: 'Email Not Found' };
+      return { status: 400, message: 'Email Not Found' };
     }
     const result = bcrypt.compareSync(password, getByEmail.password);
     if (!result) {
-      return { type: 'Password Not Equal', message: 'Invalid Password' };
+      return { status: 400, message: 'Invalid Password' };
     }
     const jwt = new JWT(getByEmail.id, email);
     const token = jwt.generateToken();
-    return { type: null, message: token };
+    return { status: null, message: token };
   };
 }
 
