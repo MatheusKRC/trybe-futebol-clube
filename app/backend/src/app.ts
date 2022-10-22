@@ -1,5 +1,6 @@
 import * as express from 'express';
 import LoginControllers from './Controllers/LoginControllers';
+import authMidlleware from './middlewares/auth.middleware';
 
 class App {
   public app: express.Express;
@@ -13,6 +14,7 @@ class App {
     const LoginController = new LoginControllers();
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.post('/login', LoginController.login);
+    this.app.get('/login/validate', authMidlleware, LoginController.getRole);
   }
 
   private config():void {

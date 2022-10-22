@@ -1,19 +1,12 @@
 import { sign, verify } from 'jsonwebtoken';
+import tokenReturn from '../Interfaces/tokenReturn';
 import JwtConfig from '../Interfaces/JwtConfig';
 
 class JWT {
-  public id: number;
-  public email: string;
-
-  constructor(id: number, email: string) {
-    this.id = id;
-    this.email = email;
-  }
-
-  public generateToken = () => {
+  public generateToken = (id: number, email: string) => {
     const payload = {
-      id: this.id,
-      email: this.email,
+      id,
+      email,
     };
 
     const jwtConfig: JwtConfig = {
@@ -34,7 +27,7 @@ class JWT {
     try {
       const JWT_SECRET = process.env.JWT_SECRET || 'kyracraft12';
       const validateToken = verify(token, JWT_SECRET);
-      return { type: null, message: validateToken };
+      return { type: null, message: validateToken as tokenReturn };
     } catch (error) {
       console.log(error);
       return { type: 'jwt malformed', message: 'Expired or invalid token' };

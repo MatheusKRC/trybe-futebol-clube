@@ -1,4 +1,5 @@
 import bcrypt = require('bcryptjs');
+import User from '../Interfaces/User';
 import Service from '../Interfaces/Service';
 import Login from '../Interfaces/Login';
 import Users from '../database/models/Users';
@@ -25,9 +26,17 @@ class LoginService {
       return { status: 401, message: 'Incorrect email or password',
       };
     }
-    const jwt = new JWT(getByEmail.id, email);
-    const token = jwt.generateToken();
+    const jwt = new JWT();
+    const token = jwt.generateToken(getByEmail.id, email);
     return { status: null, message: token };
+  };
+
+  getRole = async (email: string) => {
+    const { dataValues } = await Users.findOne({ where: { email } }) as unknown as User;
+    const { role } = dataValues;
+    if (role) {
+      return { status: null, message: role };
+    } return { status: 400, message: 'Role Not Found' };
   };
 }
 
