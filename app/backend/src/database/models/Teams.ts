@@ -7,6 +7,9 @@ class Teams extends Model {
   teamName!: string;
 }
 
+// Teams.hasMany(Matches, { foreignKey: 'campoC', as: 'campoEstrangeiroC' });
+// Teams.hasMany(Matches, { foreignKey: 'campoD', as: 'campoEstrangeiroD' });
+
 Teams.init({
   id: {
     allowNull: false,

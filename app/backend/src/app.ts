@@ -1,5 +1,6 @@
 import * as express from 'express';
 import LoginControllers from './Controllers/LoginControllers';
+import MatchesControllers from './Controllers/MatchesControllers';
 import TeamsControllers from './Controllers/TeamsControllers';
 import authMidlleware from './middlewares/auth.middleware';
 
@@ -14,11 +15,13 @@ class App {
     // Não remover essa rota
     const LoginController = new LoginControllers();
     const TeamsController = new TeamsControllers();
+    const MatchesController = new MatchesControllers();
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.post('/login', LoginController.login);
     this.app.get('/login/validate', authMidlleware, LoginController.getRole);
     this.app.get('/teams', TeamsController.getAll);
     this.app.get('/teams/:id', TeamsController.getTeamById);
+    this.app.get('/matches', MatchesController.getMatchesProgress);
   }
 
   private config():void {
