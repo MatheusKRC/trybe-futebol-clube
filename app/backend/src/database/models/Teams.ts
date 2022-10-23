@@ -3,8 +3,8 @@ import db from '.';
 // import OtherModel from './OtherModel';
 
 class Teams extends Model {
-  id: number;
-  teamName: string;
+  id!: number;
+  teamName!: string;
 }
 
 Teams.init({
@@ -21,7 +21,7 @@ Teams.init({
 }, {
   underscored: true,
   sequelize: db,
-  modelName: 'Teams',
+  modelName: 'teams',
   timestamps: false,
 });
 
