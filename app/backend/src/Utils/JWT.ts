@@ -30,7 +30,7 @@ class JWT {
       return { type: null, message: validateToken as tokenReturn };
     } catch (error) {
       console.log(error);
-      return { type: 'jwt malformed', message: 'Expired or invalid token' };
+      return { type: 'jwt malformed', message: 'Token must be a valid token' };
     }
   };
 }

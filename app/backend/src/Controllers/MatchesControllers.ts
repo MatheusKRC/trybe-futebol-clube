@@ -34,6 +34,24 @@ class MatchesControllers {
       return res.status(200).json(message);
     }
   };
+
+  public postMatch = async (req: Request, res: Response) => {
+    const { body } = req;
+    const { status, message } = await this.service.postMatch(body);
+    if (status) {
+      return res.status(status).json({ message });
+    }
+    return res.status(201).json(message);
+  };
+
+  public finisMatch = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { status, message } = await this.service.finishMatch(id);
+    if (status) {
+      return res.status(status).json({ message });
+    }
+    return res.status(200).json({ message });
+  };
 }
 
 export default MatchesControllers;
