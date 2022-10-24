@@ -44,13 +44,23 @@ class MatchesControllers {
     return res.status(201).json(message);
   };
 
-  public finisMatch = async (req: Request, res: Response) => {
+  public finishMatch = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { status, message } = await this.service.finishMatch(id);
     if (status) {
       return res.status(status).json({ message });
     }
     return res.status(200).json({ message });
+  };
+
+  public updateMatch = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const { body } = req;
+    const { status, message } = await this.service.updateMatch(body, id);
+    if (status) {
+      return res.status(status).json({ message });
+    }
+    return res.status(200).json(message);
   };
 }
 

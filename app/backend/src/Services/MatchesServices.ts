@@ -73,6 +73,18 @@ class MatchesServices {
     }
     return { status: 400, message: 'Match Not Finished' };
   };
+
+  public updateMatch = async (body: Matches, id: string) => {
+    const { homeTeamGoals, awayTeamGoals } = body;
+    const [updateMatch] = await Matches.update(
+      { homeTeamGoals, awayTeamGoals },
+      { where: { id } },
+    );
+    if (updateMatch) {
+      return { status: null, message: updateMatch };
+    }
+    return { status: 400, message: 'Match Not Updated' };
+  };
 }
 
 export default MatchesServices;

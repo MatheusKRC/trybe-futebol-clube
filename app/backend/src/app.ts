@@ -23,7 +23,8 @@ class App {
     this.app.get('/teams/:id', TeamsController.getTeamById);
     this.app.get('/matches', MatchesController.getMatchesProgress);
     this.app.post('/matches', authMidlleware, MatchesController.postMatch);
-    this.app.patch('/matches/:id/finish', authMidlleware, MatchesController.finisMatch);
+    this.app.patch('/matches/:id/finish', authMidlleware, MatchesController.finishMatch);
+    this.app.patch('/matches/:id', authMidlleware, MatchesController.updateMatch);
   }
 
   private config():void {
