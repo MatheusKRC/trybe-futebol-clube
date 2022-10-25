@@ -31,7 +31,7 @@ class LoginService {
     return { status: null, message: token };
   };
 
-  getRole = async (email: string) => {
+  public getRole = async (email: string) => {
     const { dataValues } = await Users.findOne({ where: { email } }) as unknown as User;
     const { role } = dataValues;
     if (role) {

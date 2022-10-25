@@ -13,6 +13,7 @@ import { clear } from 'console';
 import LoginService from '../Services/LoginService';
 import JWT from '../Utils/JWT';
 import { response } from 'express';
+import Matches from '../database/models/Matches';
 
 chai.use(chaiHttp);
 
@@ -40,28 +41,42 @@ describe('Testes Seção de Users e Login', async () => {
 
   let chaiHttpResponse: Response;
 
-  beforeEach(async () => {
-    sinon.stub(Users, "findOne").resolves({ 
-    username: 'Admin',
-    role: 'admin',
-    email: 'admin@admin.com',
-    password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW', } as Users);
-  });
+  // beforeEach(async () => {
+  //   sinon.stub(Users, "findOne").resolves({ 
+  //   username: 'Admin',
+  //   role: 'admin',
+  //   email: 'admin@admin.com',
+  //   password: '$2a$08$xi.Hxk1czAO0nZR..B393u10aED0RQ1N3PAEXQ7HxtLjKPEZBu.PW', } as Users);
+  // });
 
-  afterEach(()=>{
-    (Users.findOne as sinon.SinonStub).restore();
-  })
+  // afterEach(()=>{
+  //   (Users.findOne as sinon.SinonStub).restore();
+  // })
    
   it('A Rota Login existe', async () => {
     const response = await chai
     .request(app)
     .post('/login')
     .send(loginMock)
-
     expect(response.status).to.be.equal(200)
     expect(response.body).to.have.property('token')
   })
 
+  it('A Rota Login/validate existe', async () => {
+    const login = await chai
+    .request(app)
+    .post('/login')
+    .send(loginMock)
+
+    const token = login.body.token
+
+    const response = await chai
+    .request(app)
+    .get('/login/validate')
+    .set('authorization', token)
+
+    expect(response.status).to.be.equal(200)
+  })
 });
 
 
@@ -125,5 +140,4 @@ describe('Testes dos Erros Seção de Users e Login', async () => {
 
     expect(response.status).to.be.equal(401)
   })
-});
-
+})
