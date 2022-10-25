@@ -1,67 +1,53 @@
-const teamMock = 
+const teamsMock = 
   [
     {
-      id: 1,
-      teamName: 'Avaí/Kindermann',
+      team_name: 'Avaí/Kindermann',
     },
     {
-      id: 2,
-      teamName: 'Bahia',
+      team_name: 'Bahia',
     },
     {
-      id: 3,
-      teamName: 'Botafogo',
+      team_name: 'Botafogo',
     },
     {
-      id: 4,
-      teamName: 'Corinthians',
+      team_name: 'Corinthians',
     },
     {
-      id: 5,
-      teamName: 'Cruzeiro',
+      team_name: 'Cruzeiro',
     },
     {
-      id: 6,
-      teamName: 'Ferroviária',
+      team_name: 'Ferroviária',
     },
     {
-      id: 7,
-      teamName: 'Flamengo',
+      team_name: 'Flamengo',
     },
     {
-      id: 8,
-      teamName: 'Grêmio',
+      team_name: 'Grêmio',
     },
     {
-      id: 9,
-      teamName: 'Internacional',
+      team_name: 'Internacional',
     },
     {
-      id: 10,
-      teamName: 'Minas Brasília',
+      team_name: 'Minas Brasília',
     },
     {
-      id: 11,
-      teamName: 'Napoli-SC',
+      team_name: 'Napoli-SC',
     },
     {
-      id: 12,
-      teamName: 'Palmeiras',
+      team_name: 'Palmeiras',
     },
     {
-      id: 13,
-      teamName: 'Real Brasília',
+      team_name: 'Real Brasília',
     },
     {
-      id: 14,
-      teamName: 'Santos',
+      team_name: 'Santos',
     },
     {
-      id: 15,
-      teamName: 'São José-SP',
+      team_name: 'São José-SP',
     },
     {
-      id: 16,
-      teamName: 'São Paulo',
+      team_name: 'São Paulo',
     },
   ]
+
+export default teamsMock

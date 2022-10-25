@@ -5,10 +5,7 @@ import Teams from '../database/models/Teams';
 class TeamsServices {
   public getAll = async ():Promise<Service> => {
     const teams = await Teams.findAll();
-    if (teams) {
-      return { status: null, message: teams };
-    }
-    return { status: 400, message: 'Teams Not Found' };
+    return { status: null, message: teams };
   };
 
   public getTeamById = async (id: string) => {

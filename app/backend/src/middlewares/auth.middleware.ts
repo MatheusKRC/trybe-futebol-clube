@@ -9,7 +9,7 @@ const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
   if (user.type) {
     return res.status(401).json({ message: user.message });
   }
-
+  req.body.user = user;
   return next();
 };
 

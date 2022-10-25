@@ -10,7 +10,7 @@ class JWT {
     };
 
     const jwtConfig: JwtConfig = {
-      expiresIn: '15m',
+      expiresIn: '2d',
       algorithm: 'HS256',
     };
 

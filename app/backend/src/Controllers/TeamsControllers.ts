@@ -10,10 +10,7 @@ class TeamsControllers {
   }
 
   public getAll = async (req: Request, res: Response) => {
-    const { status, message } = await this.service.getAll();
-    if (status) {
-      return res.status(status).json({ message });
-    }
+    const { message } = await this.service.getAll();
     return res.status(200).json(message);
   };
 
