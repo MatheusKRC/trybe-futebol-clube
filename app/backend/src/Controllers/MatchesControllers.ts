@@ -9,10 +9,7 @@ class MatchesControllers {
   }
 
   public getAllMatches = async (req: Request, res: Response) => {
-    const { status, message } = await this.service.getAllMatches();
-    if (status) {
-      return res.status(status).json({ message });
-    }
+    const { message } = await this.service.getAllMatches();
     return res.status(200).json(message);
   };
 

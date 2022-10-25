@@ -16,10 +16,7 @@ class MatchesServices {
         },
       ],
     });
-    if (matches) {
-      return { status: null, message: matches };
-    }
-    return { status: 400, message: 'Matches Not Found' };
+    return { status: null, message: matches };
   };
 
   public getMatchesProgress = async (inProgress: boolean) => {
