@@ -2,6 +2,8 @@ import { sign, verify } from 'jsonwebtoken';
 import tokenReturn from '../Interfaces/tokenReturn';
 import JwtConfig from '../Interfaces/JwtConfig';
 
+const JWT_SECRET = process.env.JWT_SECRET || 'kyracraft12';
+
 class JWT {
   public generateToken = (id: number, email: string) => {
     const payload = {
@@ -14,7 +16,6 @@ class JWT {
       algorithm: 'HS256',
     };
 
-    const JWT_SECRET = process.env.JWT_SECRET || 'kyracraft12';
     const token = sign(payload, JWT_SECRET, jwtConfig as any);
     return token;
   };
@@ -25,7 +26,6 @@ class JWT {
     }
 
     try {
-      const JWT_SECRET = process.env.JWT_SECRET || 'kyracraft12';
       const validateToken = verify(token, JWT_SECRET);
       return { type: null, message: validateToken as tokenReturn };
     } catch (error) {

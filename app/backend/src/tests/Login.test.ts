@@ -139,5 +139,16 @@ describe('Testes dos Erros Seção de Users e Login', async () => {
     .get('/login/validate')
 
     expect(response.status).to.be.equal(401)
+    expect(response.body.message).to.be.deep.equal('Token not found')
+  })
+
+  it('A Rota Login/validate retorna erro de token invalido', async () => {
+    const response = await chai
+    .request(app)
+    .get('/login/validate')
+    .set('authorization', 'token')
+
+    expect(response.status).to.be.equal(401)
+    expect(response.body.message).to.be.deep.equal('Token must be a valid token')
   })
 })
