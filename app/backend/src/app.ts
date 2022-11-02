@@ -1,4 +1,5 @@
 import * as express from 'express';
+import LeaderboardControllers from './Controllers/LeaderboardControllers';
 import LoginControllers from './Controllers/LoginControllers';
 import MatchesControllers from './Controllers/MatchesControllers';
 import TeamsControllers from './Controllers/TeamsControllers';
@@ -16,6 +17,7 @@ class App {
     const LoginController = new LoginControllers();
     const TeamsController = new TeamsControllers();
     const MatchesController = new MatchesControllers();
+    const LeaderboardController = new LeaderboardControllers();
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.post('/login', LoginController.login);
     this.app.get('/login/validate', authMidlleware, LoginController.getRole);
@@ -25,6 +27,7 @@ class App {
     this.app.post('/matches', authMidlleware, MatchesController.postMatch);
     this.app.patch('/matches/:id/finish', authMidlleware, MatchesController.finishMatch);
     this.app.patch('/matches/:id', authMidlleware, MatchesController.updateMatch);
+    this.app.get('/leaderboard/home', LeaderboardController.getLeaderboards);
   }
 
   private config():void {
