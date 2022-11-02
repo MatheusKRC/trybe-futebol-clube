@@ -148,7 +148,6 @@ class LeaderboardServices {
 
   public leaderboardSort = async () => {
     const finalResult = await this.finalResult();
-    console.log(finalResult, 'final');
 
     const leaderboardSort = finalResult.sort((a, b) =>
       Number(b.totalPoints) - Number(a.totalPoints)
@@ -156,7 +155,6 @@ class LeaderboardServices {
       || Number(b.goalsBalance) - Number(a.goalsBalance)
       || Number(b.goalsFavor) - Number(a.goalsFavor)
       || Number(a.goalsOwn) - Number(b.goalsOwn));
-    console.log(leaderboardSort, 'FINAL');
     return leaderboardSort;
   };
 }
