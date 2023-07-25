@@ -1,7 +1,7 @@
 import Teams from '../database/models/Teams';
 import Matches from '../database/models/Matches';
 
-class LeaderboardServicesAway {
+class LeaderboardServicesHome {
   public getTeamsNames = async () => {
     const teams = await Teams.findAll();
     return teams;
@@ -15,15 +15,15 @@ class LeaderboardServicesAway {
   private totalPoints = async (teamId: number) => {
     const matches = await this.getMatchesFinished();
     let teamPoints = 0;
-    const teamFilter = matches.filter((name) => name.awayTeam === teamId);
+    const teamFilter = matches.filter((name) => name.homeTeam === teamId);
     teamFilter.forEach((points) => {
-      if (points.awayTeamGoals > points.homeTeamGoals) {
+      if (points.homeTeamGoals > points.awayTeamGoals) {
         teamPoints += 3;
       }
-      if (points.awayTeamGoals === points.homeTeamGoals) {
+      if (points.homeTeamGoals === points.awayTeamGoals) {
         teamPoints += 1;
       }
-      if (points.awayTeamGoals < points.homeTeamGoals) {
+      if (points.homeTeamGoals < points.awayTeamGoals) {
         teamPoints += 0;
       }
     });
@@ -32,7 +32,7 @@ class LeaderboardServicesAway {
 
   private totalGames = async (teamId: number) => {
     const matches = await this.getMatchesFinished();
-    const teamFilter = matches.filter((name) => name.awayTeam === teamId);
+    const teamFilter = matches.filter((name) => name.homeTeam === teamId);
     const totalGames = teamFilter.length;
     return totalGames;
   };
@@ -40,9 +40,9 @@ class LeaderboardServicesAway {
   private totalVictories = async (teamId: number) => {
     const matches = await this.getMatchesFinished();
     let count = 0;
-    const teamFilter = matches.filter((name) => name.awayTeam === teamId);
+    const teamFilter = matches.filter((name) => name.homeTeam === teamId);
     teamFilter.forEach((victories) => {
-      if (victories.awayTeamGoals > victories.homeTeamGoals) {
+      if (victories.homeTeamGoals > victories.awayTeamGoals) {
         count += 1;
         return count;
       }
@@ -54,9 +54,9 @@ class LeaderboardServicesAway {
   private totalDefeats = async (teamId: number) => {
     const matches = await this.getMatchesFinished();
     let count = 0;
-    const teamFilter = matches.filter((name) => name.awayTeam === teamId);
+    const teamFilter = matches.filter((name) => name.homeTeam === teamId);
     teamFilter.forEach((victories) => {
-      if (victories.awayTeamGoals < victories.homeTeamGoals) {
+      if (victories.homeTeamGoals < victories.awayTeamGoals) {
         count += 1;
         return count;
       }
@@ -68,9 +68,9 @@ class LeaderboardServicesAway {
   private totalDraws = async (teamId: number) => {
     const matches = await this.getMatchesFinished();
     let count = 0;
-    const teamFilter = matches.filter((name) => name.awayTeam === teamId);
+    const teamFilter = matches.filter((name) => name.homeTeam === teamId);
     teamFilter.forEach((victories) => {
-      if (victories.awayTeamGoals === victories.homeTeamGoals) {
+      if (victories.homeTeamGoals === victories.awayTeamGoals) {
         count += 1;
         return count;
       }
@@ -82,9 +82,9 @@ class LeaderboardServicesAway {
   private goalsFavor = async (teamId: number) => {
     const matches = await this.getMatchesFinished();
     let goals = 0;
-    const teamFilter = matches.filter((name) => name.awayTeam === teamId);
+    const teamFilter = matches.filter((name) => name.homeTeam === teamId);
     teamFilter.forEach((points) => {
-      goals += points.awayTeamGoals;
+      goals += points.homeTeamGoals;
       return goals;
     });
     return goals;
@@ -93,9 +93,9 @@ class LeaderboardServicesAway {
   private goalsOwn = async (teamId: number) => {
     const matches = await this.getMatchesFinished();
     let goals = 0;
-    const teamFilter = matches.filter((name) => name.awayTeam === teamId);
+    const teamFilter = matches.filter((name) => name.homeTeam === teamId);
     teamFilter.forEach((points) => {
-      goals += points.homeTeamGoals;
+      goals += points.awayTeamGoals;
       return goals;
     });
     return goals;
@@ -105,13 +105,13 @@ class LeaderboardServicesAway {
     const matches = await this.getMatchesFinished();
     let GP = 0;
     let GC = 0;
-    const teamFilter = matches.filter((name) => name.awayTeam === teamId);
+    const teamFilter = matches.filter((name) => name.homeTeam === teamId);
     teamFilter.forEach((points): number => {
-      GP += points.awayTeamGoals;
+      GP += points.homeTeamGoals;
       return GP as number;
     });
     teamFilter.forEach((points): number => {
-      GC += points.homeTeamGoals;
+      GC += points.awayTeamGoals;
       return GC as number;
     });
     const goalsBalance = Number(GP) - Number(GC);
@@ -146,7 +146,7 @@ class LeaderboardServicesAway {
     return leaderboard;
   };
 
-  public leaderboardSortAway = async () => {
+  public leaderboardSortHome = async () => {
     const finalResult = await this.finalResult();
 
     const leaderboardSort = finalResult.sort((a, b) =>
@@ -159,4 +159,4 @@ class LeaderboardServicesAway {
   };
 }
 
-export default LeaderboardServicesAway;
+export default LeaderboardServicesHome;

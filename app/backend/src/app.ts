@@ -27,8 +27,9 @@ class App {
     this.app.post('/matches', authMidlleware, MatchesController.postMatch);
     this.app.patch('/matches/:id/finish', authMidlleware, MatchesController.finishMatch);
     this.app.patch('/matches/:id', authMidlleware, MatchesController.updateMatch);
-    this.app.get('/leaderboard/home', LeaderboardController.getLeaderboards);
+    this.app.get('/leaderboard/home', LeaderboardController.getLeaderboardsHome);
     this.app.get('/leaderboard/away', LeaderboardController.getLeaderboardsAway);
+    this.app.get('/leaderboard', LeaderboardController.getLeaderboards);
   }
 
   private config():void {
